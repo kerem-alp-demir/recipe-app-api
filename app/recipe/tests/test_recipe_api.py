@@ -29,6 +29,7 @@ def detail_url(recipe_id):
     """Create and return a recipe detail URL."""
     return reverse('recipe:recipe-detail', args=[recipe_id])
 
+
 def create_recipe(user, **params):
     """Create and return a sample recipe."""
     defaults = {
@@ -42,6 +43,7 @@ def create_recipe(user, **params):
 
     recipe = Recipe.objects.create(user=user, **defaults)
     return recipe
+
 
 def create_user(**params):
     """Create and return a new user."""
@@ -111,11 +113,11 @@ class PrivateRecipeApiTests(TestCase):
             'time_minutes': 30,
             'price': Decimal('5.99'),
         }
-        res = self.client.post(RECIPES_URL, payload) # /api/recipes/recipe
+        res = self.client.post(RECIPES_URL, payload)  # /api/recipes/recipe
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         recipe = Recipe.objects.get(id=res.data['id'])
-        for k, v in payload.items(): # key and value
+        for k, v in payload.items():  # key and value
             self.assertEqual(getattr(recipe, k), v)
         self.assertEqual(recipe.user, self.user)
 
@@ -242,7 +244,7 @@ class PrivateRecipeApiTests(TestCase):
             ).exists()
             self.assertTrue(exists)
 
-        #additional by kerem
+        # additional by kerem
         _tags = Tag.objects.filter(user=self.user)
         self.assertEqual(_tags.count(), 2)
 

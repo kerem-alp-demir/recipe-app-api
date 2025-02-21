@@ -70,7 +70,6 @@ class ModelTests(TestCase):
             description='Sample recipe description.',
         )
 
-
         self.assertEqual(str(recipe), recipe.title)
 
     def test_create_tag(self):

@@ -24,11 +24,11 @@ class UserSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         """Update and return user."""
-        # if the user didn't specify a password to update, it will be null so ==> None part
+        # if the user didn't specify a password to update, it will be null so ==> None part  # noqa
         password = validated_data.pop('password', None)
         """super().update calls the update method on the model serializer base class (the one provided by the model serializer)"""  # noqa
         user = super().update(instance, validated_data)
-        # if the user specified a password for the update, we will set the new password (update)
+        # if the user specified a password for the update, we will set the new password (update)  # noqa
         if password:
             user.set_password(password)
             user.save()

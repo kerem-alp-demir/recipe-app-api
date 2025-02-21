@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.test import TestCase
 
-from rest_framework import status #status code
+from rest_framework import status  # status code
 from rest_framework.test import APIClient
 
 from core.models import Tag
@@ -14,6 +14,7 @@ from recipe.serializers import TagSerializer
 
 
 TAGS_URL = reverse('recipe:tag-list')
+
 
 def detail_url(tag_id):
     """Create and return a tag detail url."""
@@ -87,9 +88,9 @@ class PrivateTagsApiTests(TestCase):
         tag = Tag.objects.create(user=self.user, name='Breakfast')
 
         url = detail_url(tag.id)
-        res = self.client.delete(url) # call http delete method on the tag
+        res = self.client.delete(url)  # call http delete method on the tag
 
-        #HTTP_204_NO_CONTENT is the default response for deleting
+        # HTTP_204_NO_CONTENT is the default response for deleting
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
         tags = Tag.objects.filter(user=self.user)
-        self.assertFalse(tags.exists()) # no tags in the system
+        self.assertFalse(tags.exists())  # no tags in the system

@@ -8,7 +8,7 @@ from rest_framework import (
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from core.models import(
+from core.models import (
     Recipe,
     Tag,
     Ingredient,
@@ -23,7 +23,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    #override get_queryset to restrict the 'queryset = Recipe.objects.all()' owned by this user.
+    #override get_queryset to restrict the 'queryset = Recipe.objects.all()' owned by this user. # noqa
     def get_queryset(self):
         """Retrieve recipes for authenticated user."""
         return self.queryset.filter(user=self.request.user).order_by('-id')
@@ -63,7 +63,7 @@ class IngredientViewSet(mixins.DestroyModelMixin,
                         viewsets.GenericViewSet):
     """Manage ingredients in the database."""
     serializer_class = serializers.IngredientSerializer
-    # queryset = ... tells framework which models we want to be managable through this viewset
+    # queryset = ... tells framework which models we want to be managable through this viewset # noqa
     queryset = Ingredient.objects.all()
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
